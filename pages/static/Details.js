@@ -14,7 +14,7 @@ class Details extends Component {
         this.state = {
             userName:'',
             userPwd:'',
-            user:'NOLOGIN',
+            user:'',
             isModalVisible: false,
             wsOk:'登录成功',
             wsNo:'密码或账号不正确',
@@ -89,11 +89,17 @@ class Details extends Component {
         AsyncStorage.getItem('userInfo', function (error, result) {
             if (error) {}else {
                 const getInfo = JSON.parse(result);
-                that.setState({userName:getInfo.AccountName,user:getInfo.AccountName})
+                if(getInfo==undefined){
+                    return;
+                }else {
+                    that.setState({userName:getInfo.AccountName,user:getInfo.AccountName})
+                }
+
             }
         })
 
     }
+
     render() {
         return (
             <View style={styles.box1}>
